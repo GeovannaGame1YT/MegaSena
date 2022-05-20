@@ -1,24 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import TextBoxAB from './componetes/TextBoxAB';
-import MegaSena from './componetes/MegaSena';
+import React from "react";
+import {View, Text, StyleSheet, Button, ScrollView, SafeAreaView} from "react-native";
+//import Mega from "./components/mega/mega";
+import Mega from "./mega/mega";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <TextBoxAB/>
-      <MegaSena/>
-      <Text>Teste do TextBox AB</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
+const App = ()=>{        
+        
+    return (
+    <SafeAreaView style={MainStyle.main}>
+            <Mega/>
+            
+            {
+                
+            }
+   </SafeAreaView>
+    )
+    }
+
+
+    const MainStyle = StyleSheet.create({
+        main:{
+            display: "flex",
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+        }
+    })
+
+
+export default App;
