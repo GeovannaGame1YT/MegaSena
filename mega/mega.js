@@ -85,7 +85,6 @@ export default class Mega extends Component{
                 Gerador da Mega-Sena - {this.state.qntdNumero}
                 {/*novo inportação criada para test */}
                 {this.jogo.qnatNum}
-                 
             </Text>
 
             <TextInput 
