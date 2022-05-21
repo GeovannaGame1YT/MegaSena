@@ -12,6 +12,15 @@ export default class Mega extends Component{
             numeros: []
         } 
 
+        /*novo inportação criada para test */
+        jogo = {
+            qnatNum: this.props.qnatNum,
+            numero: []
+        }
+        alteraNumR = (result)=>{
+            this.setState({qnatNum: + result*6})
+        }
+
 
         // constructor(props){
         //     super(props)
@@ -41,7 +50,17 @@ export default class Mega extends Component{
             console.log(numeros);
 
         }
-       
+        /*novo inportação criada para test */
+        gerarjogo = ()=>{
+            const numero = Array(this.jogo.qnatNum)
+            .fill()
+            .reduce(n=> [...n, this.gerarNumeroNaoContido(n)], [])
+            .sort()
+            this.setState({qnatNum:numero})
+
+            console.log(numero);
+        }
+
         exibirNumeros = ()=>{
             const nums = this.state.numeros
             return nums.map(num=>{
@@ -49,9 +68,14 @@ export default class Mega extends Component{
             })
         }
 
+        /*novo inportação criada para test */
+        exibirJogo = ()=>{
+            const numss = this.jogo.numero
+            return numss.map(num=>{
+                return <MegaNumero key={num} num={num}/>
+            })
+        }
     
-
-
     render(){
         return( 
             
@@ -59,6 +83,8 @@ export default class Mega extends Component{
             <Text style={{ fontWeight: 'bold' }}></Text>
             <Text style={Estilo.txtG}>
                 Gerador da Mega-Sena - {this.state.qntdNumero}
+                {/*novo inportação criada para test */}
+                {this.jogo.qnatNum}
                  
             </Text>
 
@@ -71,11 +97,25 @@ export default class Mega extends Component{
                 onChangeText={this.alteraNum}
                 
             /> 
-            
+            {/*novo inportação criada para test */}
+            <TextInput 
+                keyboardType={'number-pad'} 
+                keyboardAppearance={'dark'}
+                placeholder={"Gerar Jogo"}
+                KeyboardAvoidingView
+                value={this.jogo.qnatNum}
+                onChangeText={this.alteraNumR}
+                
+            />
 
             <Button 
             title="clique aqui" 
             onPress={this.gerarNumeros}
+            />
+            {/*novo inportação criada para test */}
+            <Button
+            title="Gerar jogo"
+            onPress={this.gerarjogo}
             />
 
             <View style={{
@@ -86,6 +126,8 @@ export default class Mega extends Component{
                 justifyContent: "center"
                 }}>
                     {this.exibirNumeros()}
+                    {/*novo inportação criada para test */}
+                    {this.exibirJogo()}
             </View>
 
 
