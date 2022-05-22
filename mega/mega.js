@@ -18,7 +18,7 @@ export default class Mega extends Component{
             numero: []
         }
         alteraNumR = (result)=>{
-            this.setState({qnatNum: + result*6})
+            this.setState({qnatNum: + result})
         }
 
 
@@ -56,7 +56,7 @@ export default class Mega extends Component{
             .fill()
             .reduce(n=> [...n, this.gerarNumeroNaoContido(n)], [])
             .sort()
-            this.setState({qnatNum:numero})
+            this.setState({numero:6})
 
             console.log(numero);
         }
@@ -70,8 +70,8 @@ export default class Mega extends Component{
 
         /*novo inportação criada para test */
         exibirJogo = ()=>{
-            const numss = this.jogo.numero
-            return numss.map(num=>{
+            const nums = this.jogo.numero
+            return nums.map(num=>{
                 return <MegaNumero key={num} num={num}/>
             })
         }
@@ -103,7 +103,7 @@ export default class Mega extends Component{
                 placeholder={"Gerar Jogo"}
                 KeyboardAvoidingView
                 value={this.jogo.qnatNum}
-                onChangeText={this.alteraNumR}
+                onChangeText={this.alteraNum}
                 
             />
 
@@ -114,7 +114,7 @@ export default class Mega extends Component{
             {/*novo inportação criada para test */}
             <Button
             title="Gerar jogo"
-            onPress={this.gerarjogo}
+            onPress={this.gerarNumeros}
             />
 
             <View style={{
@@ -126,7 +126,16 @@ export default class Mega extends Component{
                 }}>
                     {this.exibirNumeros()}
                     {/*novo inportação criada para test */}
-                    {this.exibirJogo()}
+            </View>
+
+            <View style={{
+                display: "flex",
+                flexDirection: "row",
+                marginTop: 20,
+                flexWrap: "wrap",
+                justifyContent: "center"
+            }}>
+                {this.exibirJogo()}
             </View>
 
 
