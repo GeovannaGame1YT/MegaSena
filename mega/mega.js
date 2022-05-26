@@ -37,6 +37,14 @@ export default class Mega extends Component{
             const novo = parseInt(Math.random()*60+1)
             return nums.includes(novo) ? this.gerarNumeroNaoContido(nums) : novo
         }
+        /* nova inplementação para tesete ainda não esta funcionando coretamente */
+        gerarjogos = nums => {
+            if(nums >= 6){
+                const novo = parent(Math.random()*60+1)
+                return nums.includes(novo) ? this.gerarjogos(nums) : novo
+            }
+            
+        }
 
         gerarNumeros = ()=>{
 
@@ -54,9 +62,9 @@ export default class Mega extends Component{
         gerarjogo = ()=>{
             const numero = Array(this.jogo.qnatNum)
             .fill()
-            .reduce(n=> [...n, this.gerarNumeroNaoContido(n)], [])
+            .reduce(n=> [...n, this.gerarjogos(n)], [])
             .sort()
-            this.setState({numero:6})
+            this.setState({numero:numero})
 
             console.log(numero);
         }
@@ -125,9 +133,9 @@ export default class Mega extends Component{
                 justifyContent: "center"
                 }}>
                     {this.exibirNumeros()}
-                    {/*novo inportação criada para test */}
             </View>
 
+{/*novo inportação criada para test */}
             <View style={{
                 display: "flex",
                 flexDirection: "row",
