@@ -1,26 +1,37 @@
-import React from 'react';
-import { useState } from 'react/cjs/react.development';
-//import React, {useState} from 'react';
+import React from 'react'
+import { StyleSheet, Button, View } from 'react-native'
+import email from 'react-native-email'
 
-export default EnviaEmai => {
+export default class App extends React.Component {
+    render() {
+        return (
+            <View style={styles.container}>
+                <br/>
+                <Button title="Enviar email" onPress={this.handleEmail} />
+            </View>
+        )
+    }
 
-  return (
-    <div className="container">
-      <form>
-        <label htmlFor="email">E-mail</label>
-        <input type="text" id="email" name="email" placeholder="E-mail de destino.." />
-
-        <label htmlFor="nome">Nome</label>
-        <input type="text" id="nome" name="nome" placeholder="Nome da pessoa.." />
-
-        <label htmlFor="mensagem">Mensagem</label>
-        <textarea id="mensagem" name="mensagem" placeholder="Escreva algo.." className="textArea"></textarea>
-
-        <label htmlFor="anexo">Anexo</label>
-        <input type="file" id="anexo" name="anexo" />
-
-        <input type="submit" value="Enviar" />
-      </form>
-    </div>
-  );
+    handleEmail = () => {
+        const to = ['geovanna.gomes.silva@hotmail.com'] // string ou array de endereços de e-mail
+        email(to, {
+            // Argumentos da estrutura do email
+            cc: ['Numeros Sortiados da Mega Sena'], // string ou array de endereços de e-mail
+            bcc: 'this.alteraNum', // string ou array de endereços de e-mail
+            subject: 'Números gerados da MegaSena',
+            body: 'Números gerado da Mega Sena $[(exibirNumeros)]'
+        }).catch(console.error)
+    }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
+})
+
+//Alelui o email esta funcionado agora só falta o banco de dados
+//Casso de erro coloque no CMD npm install react-native-email
+//para instalar o sistema de envio de email

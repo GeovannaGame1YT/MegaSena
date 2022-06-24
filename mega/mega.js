@@ -6,17 +6,11 @@ import MegaNumero from "./MegaNumero"
 export default class Mega extends Component{
         
     
-
       state = {
             qntdNumero: this.props.qntdNumero,
             numeros: []
         } 
 
-        /*novo inportação criada para test */
-        jogo = {
-            qnatNum: this.props.qnatNum,
-            numero: []
-        }
         alteraNumR = (result)=>{
             this.setState({qnatNum: + result})
         }
@@ -37,14 +31,6 @@ export default class Mega extends Component{
             const novo = parseInt(Math.random()*60+1)
             return nums.includes(novo) ? this.gerarNumeroNaoContido(nums) : novo
         }
-        /* nova inplementação para tesete ainda não esta funcionando coretamente */
-        gerarjogos = nums => {
-            if(nums >= 6){
-                const novo = parent(Math.random()*60+1)
-                return nums.includes(novo) ? this.gerarjogos(nums) : novo
-            }
-            
-        }
 
         gerarNumeros = ()=>{
 
@@ -58,16 +44,6 @@ export default class Mega extends Component{
             console.log(numeros);
 
         }
-        /*novo inportação criada para test */
-        gerarjogo = ()=>{
-            const numero = Array(this.jogo.qnatNum)
-            .fill()
-            .reduce(n=> [...n, this.gerarjogos(n)], [])
-            .sort()
-            this.setState({numero:numero})
-
-            console.log(numero);
-        }
 
         exibirNumeros = ()=>{
             const nums = this.state.numeros
@@ -76,13 +52,6 @@ export default class Mega extends Component{
             })
         }
 
-        /*novo inportação criada para test */
-        exibirJogo = ()=>{
-            const nums = this.jogo.numero
-            return nums.map(num=>{
-                return <MegaNumero key={num} num={num}/>
-            })
-        }
     
     render(){
         return( 
@@ -91,39 +60,29 @@ export default class Mega extends Component{
             <Text style={{ fontWeight: 'bold' }}></Text>
             <Text style={Estilo.txtG}>
                 Gerador da Mega-Sena - {this.state.qntdNumero}
-                {/*novo inportação criada para test */}
-                {this.jogo.qnatNum}
             </Text>
 
+                <div>
+                    <br/>
             <TextInput 
                 keyboardType={'number-pad'} 
                 keyboardAppearance={'dark'}
+                fontSize={"16"}
                 placeholder={"digite um número 1 a 10"}
                 KeyboardAvoidingView
                 value={this.state.qntdNumero}
                 onChangeText={this.alteraNum}
                 
             /> 
-            {/*novo inportação criada para test */}
-            <TextInput 
-                keyboardType={'number-pad'} 
-                keyboardAppearance={'dark'}
-                placeholder={"Gerar Jogo"}
-                KeyboardAvoidingView
-                value={this.jogo.qnatNum}
-                onChangeText={this.alteraNum}
-                
-            />
-
+            </div>
+            
+            <div>
+                <br/>
             <Button 
-            title="clique aqui" 
+            title="Gerar Números" 
             onPress={this.gerarNumeros}
             />
-            {/*novo inportação criada para test */}
-            <Button
-            title="Gerar jogo"
-            onPress={this.gerarNumeros}
-            />
+            </div>
 
             <View style={{
                 display: "flex",
@@ -134,19 +93,6 @@ export default class Mega extends Component{
                 }}>
                     {this.exibirNumeros()}
             </View>
-
-{/*novo inportação criada para test */}
-            <View style={{
-                display: "flex",
-                flexDirection: "row",
-                marginTop: 20,
-                flexWrap: "wrap",
-                justifyContent: "center"
-            }}>
-                {this.exibirJogo()}
-            </View>
-
-
             </>
         
         )
